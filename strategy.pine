@@ -1,0 +1,23 @@
+//@version=5
+indicator("Custom Moving Averages", overlay=true)
+
+// Define input parameters
+length5 = input(5, title="5-Day SMA Length")
+length10 = input(10, title="10-Day EMA Length")
+length20 = input(20, title="20-Day SMA Length")
+
+// Calculate moving averages
+sma5 = ta.sma(close, length5)
+ema10 = ta.ema(close, length10)
+sma20 = ta.sma(close, length20)
+
+// Determine bullish or bearish condition
+isBullish = close > sma20
+isBearish = close < sma20
+
+// Plot moving averages with color changes
+plot(sma5, color=isBullish ? color.green : color.red, title="5-Day SMA")
+plot(ema10, color=isBullish ? color.green : color.red, title="10-Day EMA")
+plot(sma20, color=isBullish ? color.green : color.red, title="20-Day SMA")
+
+plot(close)
